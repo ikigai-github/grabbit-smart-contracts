@@ -1,3 +1,6 @@
 [submodule "vulcan-documentation"]
 	path = vulcan-documentation
 	url = https://github.com/ikigai-github/vulcan-documentation.git
+[submodule "grabbit-documentation"]
+	path = grabbit-documentation
+	url = https://github.com/ikigai-github/grabbit-documentation

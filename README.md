@@ -7,13 +7,13 @@ Development on the onchain contracts should be done in feature branches and merg
 When the contracts used in Apollo are updated, the state of the repo at that point should be merged to `main`. Until then all onchain changes should remain in `develop`.
 
 ## Decentralised and Concurrent Auctions
-The auction mechanism makes use of a Finite Set on-chain that records all the bidders enrolled within the auction. This means that every bidder has their own BidEscrow and therefore there is no contention when making bids.
+The auction mechanism makes use of a Finite Set on-chain that records all the bidders enrolled within the auction. This means that every bidder has their own BidEscrow and therefore there is no contention when making bids. See [Grabbit Documentation](https://github.com/ikigai-github/grabbit-documentation) for more.
 
 ## Development:
 
 All on-chain scripts are written in Plutarch and can be found in ./onchain
 
-All off-chain contracts are written w/ Lucid-Evolution and can be found in [Apollo-Offchain](github.com/ikigai-technologies/apollo-offchain) (currently closed source)
+All off-chain contracts are written w/ Lucid-Evolution and can be found in [Apollo-Offchain](https://github.com/ikigai-github/apollo-offchain) (currently closed source)
 
 To devlop within the on-chain script environment enter a nix shell with the make command
 - `make shell`

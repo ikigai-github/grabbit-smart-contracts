@@ -1,16 +1,11 @@
 cabal-version:      3.0
 name:               vulcan-scripts
 version:            0.1
-synopsis:           TODO
-description:        TODO
-homepage:           https://github.com/ikigai-github/vulcan-smart-contracts
-bug-reports:        https://github.com/ikigai-github/vulcan-smart-contracts
-license:
-license-file:
-author:             MLabs
-maintainer:         TODO
-copyright:          TODO
-category:           TODO
+homepage:           https://github.com/ikigai-github/grabbit-smart-contracts
+bug-reports:        https://github.com/ikigai-github/grabbit-smart-contracts
+license:            Apache 2.0
+license-file:       
+author:             Ikigai Technologies
 build-type:         Simple
 tested-with:        GHC ==9.2.1
 extra-source-files:
@@ -20,7 +15,7 @@ extra-source-files:
 
 source-repository head
   type:     git
-  location: https://github.com/ikigai-github/vulcan-smart-contracts
+  location: https://github.com/ikigai-github/grabbit-smart-contracts
 
 -- Common sections
 
