@@ -1,0 +1,3 @@
+[submodule "vulcan-documentation"]
+	path = vulcan-documentation
+	url = https://github.com/ikigai-github/vulcan-documentation.git

@@ -1,0 +1,390 @@
+cabal-version:      3.0
+name:               vulcan-scripts
+version:            0.1
+synopsis:           TODO
+description:        TODO
+homepage:           https://github.com/ikigai-github/vulcan-smart-contracts
+bug-reports:        https://github.com/ikigai-github/vulcan-smart-contracts
+license:
+license-file:
+author:             MLabs
+maintainer:         TODO
+copyright:          TODO
+category:           TODO
+build-type:         Simple
+tested-with:        GHC ==9.2.1
+extra-source-files:
+  ../compiled/*.plutus
+  ../examples/AuctionParams/*.json
+  ../examples/parameters/*.json
+
+source-repository head
+  type:     git
+  location: https://github.com/ikigai-github/vulcan-smart-contracts
+
+-- Common sections
+
+flag with-trace
+  description: Compile scripts with traces
+  manual:      True
+  default:     False
+
+common common-unit
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-uni-patterns
+    -Wincomplete-record-updates -Wredundant-constraints
+    -Wmissing-export-lists -Wmissing-deriving-strategies -Werror
+
+  build-depends:
+    , base      ^>=4.16
+    , plutarch
+
+  default-extensions:
+    PackageImports
+    BangPatterns
+    BinaryLiterals
+    ConstraintKinds
+    DataKinds
+    DeriveFunctor
+    DeriveGeneric
+    DeriveTraversable
+    DerivingStrategies
+    DerivingVia
+    EmptyCase
+    FlexibleContexts
+    FlexibleInstances
+    GeneralisedNewtypeDeriving
+    HexFloatLiterals
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    MultiParamTypeClasses
+    NumericUnderscores
+    OverloadedStrings
+    ScopedTypeVariables
+    StandaloneDeriving
+    TupleSections
+    TypeOperators
+
+  default-language:   Haskell2010
+
+
+common common-lang
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-uni-patterns -Wno-unused-do-bind
+    -Wno-partial-type-signatures -Wmissing-export-lists
+    -Wincomplete-record-updates -Wmissing-deriving-strategies
+    -Wno-name-shadowing -Wunused-foralls -fprint-explicit-foralls
+    -fprint-explicit-kinds -fwarn-missing-import-lists
+
+  mixins:
+    base hiding (Prelude),
+    pprelude (PPrelude as Prelude)
+
+  build-depends:
+    , base      >=4.14
+    , pprelude
+
+  default-extensions:
+    PackageImports
+    NoStarIsType
+    BangPatterns
+    BinaryLiterals
+    ConstrainedClassMethods
+    ConstraintKinds
+    DataKinds
+    DeriveAnyClass
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DerivingStrategies
+    DerivingVia
+    DoAndIfThenElse
+    DuplicateRecordFields
+    EmptyCase
+    EmptyDataDecls
+    EmptyDataDeriving
+    ExistentialQuantification
+    ExplicitForAll
+    FlexibleContexts
+    FlexibleInstances
+    ForeignFunctionInterface
+    GADTSyntax
+    GeneralisedNewtypeDeriving
+    HexFloatLiterals
+    ImplicitPrelude
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    MonomorphismRestriction
+    MultiParamTypeClasses
+    NamedFieldPuns
+    NamedWildCards
+    NumericUnderscores
+    OverloadedStrings
+    PartialTypeSignatures
+    PatternGuards
+    PolyKinds
+    PostfixOperators
+    QualifiedDo
+    RankNTypes
+    RelaxedPolyRec
+    ScopedTypeVariables
+    StandaloneDeriving
+    StandaloneKindSignatures
+    TraditionalRecordSyntax
+    TupleSections
+    TypeApplications
+    TypeFamilies
+    TypeOperators
+    TypeSynonymInstances
+    ViewPatterns
+    OverloadedRecordDot
+
+  default-language:   Haskell2010
+
+library
+  import:          common-lang
+  exposed-modules:
+    Vulcan.Compile
+    Vulcan.Config
+    Vulcan.Onchain.Auction.Validator.Common
+    Vulcan.Onchain.Auction.Validator.Helpers
+    Vulcan.Onchain.Auction.Validator.Private
+    Vulcan.Onchain.Auction.Validator.Public
+    Vulcan.Onchain.Auction.StateMP.Common 
+    Vulcan.Onchain.Auction.StateMP.Private 
+    Vulcan.Onchain.Auction.StateMP.Public
+    Vulcan.Onchain.NFT.MP
+    Vulcan.Onchain.FinSet.MP.Standard
+    Vulcan.Onchain.FinSet.MP.Separator
+    Vulcan.Onchain.FinSet.MP.Common
+    Vulcan.Onchain.FinSet.MP.Helpers
+    Vulcan.Onchain.FinSet.Validator
+    Vulcan.Onchain.Market.MP
+    Vulcan.Onchain.Market.Validator
+    Vulcan.Onchain.Collections.OnchainFTMint
+    Vulcan.Onchain.Collections.SequentialMint
+    Vulcan.Onchain.Collections.BulkMint
+    Vulcan.Onchain.Collections.DirectTransfer
+    Vulcan.Onchain.Collections.Utils
+    Vulcan.Onchain.Metadata.Constants
+    Vulcan.Onchain.Metadata.OnchainNFTMint
+    Vulcan.Onchain.Metadata.Types
+    Vulcan.SpecialUTxO.Types
+    Vulcan.SpecialUTxO.Utils
+    Vulcan.Types.FinSet
+    Vulcan.Types.Auction
+    Vulcan.Types.Market
+    Vulcan.Types.State
+    Vulcan.Utils
+    Vulcan.Utils.List
+    Vulcan.Utils.Patterns
+    Vulcan.Utils.Scripts
+    Vulcan.Utils.Value
+    Vulcan.Utils.Prelude
+
+  build-depends:
+    , aeson
+    , bytestring
+    , generics-sop
+    , mtl
+    , filepath
+    , plutarch
+    , plutarch-extra
+    , liqwid-plutarch-extra
+    , plutus-core
+    , plutus-ledger-api
+    , plutus-tx
+    , ply-plutarch
+    , ply-core
+    , servant
+    , servant-server
+    , text
+    , vulcan-common
+
+  hs-source-dirs:  src
+
+library pprelude
+  default-language: Haskell2010
+  build-depends:
+    , base
+    , plutarch
+
+  exposed-modules:  PPrelude
+  hs-source-dirs:   src
+
+library script-serialize
+  import:           common-lang
+  default-language: Haskell2010
+  build-depends:
+    , aeson
+    , aeson-pretty
+    , base
+    , base16-bytestring
+    , bytestring
+    , cardano-binary
+    , plutarch
+    , plutus-ledger-api
+    , serialise
+    , text
+    , vulcan-common
+
+  exposed-modules:  Scripts.V2.Serialize
+  hs-source-dirs:   src
+
+executable vulcan-server
+  import:         common-lang
+  main-is:        Main.hs
+  build-depends:
+    , aeson
+    , aeson-pretty
+    , base
+    , base16-bytestring
+    , bytestring
+    , cardano-binary
+    , directory
+    , filepath
+    , plutus-ledger-api
+    , script-serialize
+    , serialise
+    , servant-server
+    , ply-core
+    , text
+    , vulcan-common
+    , vulcan-scripts
+    , wai-cors-json
+    , warp
+
+  hs-source-dirs: app/vulcan-server
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
+
+library wai-cors-json
+  import:           common-lang
+  default-language: Haskell2010
+  build-depends:
+    , wai
+    , wai-cors
+    , wai-extra
+
+  exposed-modules:  Network.Wai.Middleware.Cors.JsonCors
+  hs-source-dirs:   src
+
+executable vulcan-scripts-compile
+  import:         common-lang
+  main-is:        Main.hs
+  build-depends:
+    , directory
+    , filepath
+    , plutarch
+    , plutus-ledger-api
+    , ply-plutarch
+    , ply-core
+    , script-serialize
+    , vulcan-common
+    , vulcan-scripts
+    , aeson
+    , aeson-pretty
+    , text
+    , transformers
+    , bytestring
+  hs-source-dirs: app/vulcan-scripts-compile
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
+
+test-suite vulcan-scripts-test
+  import:         common-lang
+  type:           exitcode-stdio-1.0
+  main-is:        Spec.hs
+  other-modules:
+    Test.Vulcan.CommonInputs
+    Test.Vulcan.Unit.Auction.Private
+    Test.Vulcan.Unit.Auction.Private.BidAct
+    Test.Vulcan.Unit.Auction.Private.BuyNowAct
+    Test.Vulcan.Unit.Auction.Private.CancelAct
+    Test.Vulcan.Unit.Auction.Private.ExtendAct
+    Test.Vulcan.Unit.Auction.Private.UnregisterAct
+    Test.Vulcan.Unit.Auction.Private.IssuePaddleAct
+    Test.Vulcan.Unit.Auction.Private.RefundAct
+    Test.Vulcan.Unit.Auction.Private.ResolveAct
+    Test.Vulcan.Unit.Debug
+    Test.Vulcan.Unit.Auction.Public
+    Test.Vulcan.Unit.FinSet.MP
+    Test.Vulcan.Unit.FinSet.Separator
+    Test.Vulcan.Unit.FinSet.Validator
+    Test.Vulcan.Unit.StateMP.Private
+    Test.Vulcan.Unit.StateMP.Public
+    Test.Vulcan.Unit.Term
+  build-depends:
+    , tasty 
+    , plutarch-unit
+    , containers
+    , data-default
+    , hedgehog
+    , hspec
+    , hspec-core
+    , hspec-hedgehog
+    , plutarch
+    , plutarch-test
+    , liqwid-plutarch-extra
+    , plutarch-extra
+    , plutarch-context-builder
+    , plutus-core
+    , plutus-ledger-api
+    , plutus-tx
+    , QuickCheck
+    , quickcheck-instances
+    , vulcan-common
+    , vulcan-scripts
+    , text
+
+  hs-source-dirs: test
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
+
+executable plutarch-report
+    import:             common-lang
+    main-is:            PlutarchMain.hs
+    hs-source-dirs:     test
+    
+    ghc-options:        -main-is PlutarchMain
+                        -Wno-name-shadowing
+                        -fno-warn-unused-binds
+                        -fno-warn-unused-matches
+                        -fno-warn-unused-imports
+
+    other-modules:      PlutarchEval.Test
+                        Test.Vulcan.CommonInputs
+
+    build-depends:        aeson
+                        , base
+                        , base16-bytestring ^>= 1.0.2.0
+                        , cassava ^>= 0.5.2.0
+                        , cborg   ^>= 0.2.7.0
+                        , containers
+                        , data-default
+                        , extra
+                        , flat
+                        , foldl
+                        , hedgehog
+                        , lens
+                        , plutarch-context-builder
+                        , plutarch
+                        , liqwid-plutarch-extra
+                        , plutus-core
+                        , plutus-ledger-api
+                        , plutus-tx
+                        , prettyprinter
+                        , serialise
+                        , text
+                        , time
+                        , vector
+                        , vulcan-common
+                        , vulcan-scripts
+
+    default-extensions:
+                        ViewPatterns
+
