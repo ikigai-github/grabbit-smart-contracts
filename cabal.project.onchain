@@ -1,0 +1,7 @@
+packages: 
+  ./onchain
+  ./common
+
+tests: true
+test-show-details: direct
+
